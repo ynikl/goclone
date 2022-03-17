@@ -26,7 +26,11 @@ git config --global clone.directory /path/pre-set
 
 ## In a more fluent way
 
-`goclone` runs in a child process so that it is impossible to `cd` to the directory where repo is. But we can seek help from shell. Please add code below to your shell scripts such as `.bash_profile` or `.zshrc`, then reopen shell or terminal.
+`goclone` runs in a child process so that it is impossible to `cd` to the directory where repo is. 
+
+But we can seek help from shell. 
+
+Please add code below to your shell scripts such as `.bash_profile` or `.zshrc`, then reopen shell or terminal.
 
 ```bash
 glone () {
