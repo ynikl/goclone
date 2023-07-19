@@ -64,3 +64,9 @@ Resolving deltas: 100% (19/19), done.
 ``` bash
 go run . https://github.com/keaising/goclone 
 ```
+
+结果路径为:
+
+``` bash
+~/go/src/github.com/keaising/goclone/  
+```
