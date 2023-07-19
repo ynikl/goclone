@@ -56,3 +56,11 @@ Resolving deltas: 100% (19/19), done.
 ~/code/github.com/keaising/goclone master 5s
 Δ
 ```
+
+## CHANGELOG
+
+修改代码调整，适应以下使用方式, 默认拷贝到 `GOPATH` 路径下
+
+``` bash
+go run . https://github.com/keaising/goclone 
+```

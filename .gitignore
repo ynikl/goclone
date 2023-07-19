@@ -15,3 +15,5 @@
 # vendor/
 
 goclone
+
+.idea/

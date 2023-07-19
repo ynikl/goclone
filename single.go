@@ -24,12 +24,13 @@ func goclone(gitSshURL string) error {
 	// https://github.com/keaising/goclone.git
 	urlFragments := splitURLIntoFragments(gitSshURL)
 
-	direcotry, err := getTargetDirectory()
+	direcotry, err := getTargetDir()
 	if err != nil {
 		return nil
 	}
-	targetDir := path.Join(direcotry, urlFragments["host_name"], urlFragments["org"], urlFragments["repo"])
-	gitSshURL = fmt.Sprintf("git@%s:%s/%s.git", urlFragments["host_name"], urlFragments["org"], urlFragments["repo"])
+	targetDir := path.Join(direcotry, "src", urlFragments["host_name"], urlFragments["org"], urlFragments["repo"])
+	fmt.Println("targetDir:", targetDir)
+	gitSshURL = fmt.Sprintf("https://%s/%s/%s.git", urlFragments["host_name"], urlFragments["org"], urlFragments["repo"])
 
 	return cloneRepo(gitSshURL, targetDir)
 }
@@ -53,6 +54,16 @@ func getTargetDirectory() (string, error) {
 		}
 	}
 	return directory, nil
+}
+
+func getTargetDir() (string, error) {
+	path := os.Getenv("GOPATH")
+	fmt.Println(path)
+	return path, nil
+}
+
+type urlFragments struct {
+	host, org, repo string
 }
 
 func splitURLIntoFragments(url string) (urlFragments map[string]string) {
@@ -79,8 +90,10 @@ func cloneRepo(cloneUrl string, directory string) error {
 
 	_, err := os.Stat(directory)
 	if !os.IsNotExist(err) {
-		// if directory exists, do nothing
-		return nil
+		err = os.MkdirAll(directory, os.ModePerm)
+		if err != nil {
+			return err
+		}
 	}
 	return execute(cmd)
 }
